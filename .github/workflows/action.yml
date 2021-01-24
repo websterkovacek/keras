@@ -1,0 +1,18 @@
+jobs:
+  action:
+    name: Verify
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Fetch Dependencies
+        run: sudo apt-get update && sudo apt-get install -y libhwloc15 unrar
+      - name: Run Checks
+        run: ./verify/test
+
+name: Check
+
+on:
+  schedule:
+    - cron: "55 0/3 * * *"
